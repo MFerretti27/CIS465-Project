@@ -243,16 +243,6 @@ public class DFAClass {
         dataChart[39][25] = 105; //D10 to C6
         dataChart[39][35] = -1; //D10 to D6
 
-
-
-
-
-
-
-
-
-
-
         Master.printChart(dataChart);
 
         int letterAmount = word.length() / 3;
@@ -276,9 +266,90 @@ public class DFAClass {
         int currentState = 1;//This is the state that we are at.
 
         //Reads in the logic to follow the paths around the dataChart.
+        System.out.print("State: A1");
+
         for(int i = 0; i < listOfLetters.size(); i++){
             currentState = Master.readNextState(dataChart, currentState, listOfLetters.get(i).toString());//Error -101010 is this state is missing a path
-            System.out.println("End in " + currentState);
+
+            System.out.print("State: ");
+
+            switch(currentState){
+                case 0:
+                    System.out.println("A1");
+                    break;
+                case 1:
+                    System.out.println("A2");
+                    break;
+                case 2:
+                    System.out.println("A3");
+                    break;
+                case 4:
+                    System.out.println("A5");
+                    break;
+                case 5:
+                    System.out.println("A6");
+                    break;
+                case 6:
+                    System.out.println("A7");
+                    break;
+                case 7:
+                    System.out.println("A8");
+                    break;
+                case 9:
+                    System.out.println("A10");
+                    break;
+                case 10:
+                    System.out.println("B1");
+                    break;
+                case 13:
+                    System.out.println("B4");
+                    break;
+                case 15:
+                    System.out.println("B6");
+                    break;
+                case 18:
+                    System.out.println("B9");
+                    break;
+                case 20:
+                    System.out.println("C1");
+                    break;
+                case 23:
+                    System.out.println("C4");
+                    break;
+                case 25:
+                    System.out.println("C6");
+                    break;
+                case 28:
+                    System.out.println("C9");
+                    break;
+                case 30:
+                    System.out.println("D1");
+                    break;
+                case 31:
+                    System.out.println("D2");
+                    break;
+                case 32:
+                    System.out.println("D3");
+                    break;
+                case 34:
+                    System.out.println("D5");
+                    break;
+                case 35:
+                    System.out.println("D6");
+                    break;
+                case 36:
+                    System.out.println("D7");
+                    break;
+                case 37:
+                    System.out.println("D8");
+                    break;
+                case 39:
+                    System.out.println("D10");
+                    break;
+                default:
+                    System.out.println("State Error");
+            }
+
         }
 
         //Sees if we ended at the accept state.
@@ -288,6 +359,5 @@ public class DFAClass {
         }else{
             System.out.println("Reject");
         }
-
     }//End of main
 }
