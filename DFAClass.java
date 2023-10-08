@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import static java.lang.Math.abs;
 /*
-//Isaac Bouwkamp, Matthew Farretti
+    Isaac Bouwkamp, Matthew Ferretti
 */
 public class DFAClass {
     private int numberOfStates = 40;
@@ -53,7 +53,7 @@ public class DFAClass {
 
         String word = "";
         while(validInput == 0) {
-            System.out.println("Please enter a valid string: ");
+            System.out.println("\nPlease enter a valid string: ");
             Scanner scan = new Scanner(System.in);
             String inputString = scan.nextLine();//Waiting for a valid input.
             word = inputString;
@@ -63,6 +63,7 @@ public class DFAClass {
             } else {
                 System.out.println("Not a valid string...");
             }
+            scan.close();
         }//End of checking for a valid sting length.
 
         //top down from 0 to 4 for the states.
@@ -243,15 +244,14 @@ public class DFAClass {
         dataChart[39][25] = 105; //D10 to C6
         dataChart[39][35] = -1; //D10 to D6
 
-        Master.printChart(dataChart);
+        //Master.printChart(dataChart); // Used for debugging 
 
-        int letterAmount = word.length() / 3;
 
         int startSub = 0;
         int endSub = 3;
         String currentLetter = "";
 
-        ArrayList listOfLetters = new ArrayList();
+        ArrayList<String> listOfLetters = new ArrayList<String>();
 
         while(endSub <= word.length()){//This just splits up the input string into the letters.
             currentLetter = word.substring(startSub,endSub);
@@ -261,7 +261,7 @@ public class DFAClass {
             listOfLetters.add(currentLetter);
         }
 
-        System.out.println(listOfLetters);//Test
+        System.out.println("\n" + listOfLetters + "\n");//Test
 
         int currentState = 1;//This is the state that we are at.
 
@@ -271,7 +271,7 @@ public class DFAClass {
         for(int i = 0; i < listOfLetters.size(); i++){
             currentState = Master.readNextState(dataChart, currentState, listOfLetters.get(i).toString());//Error -101010 is this state is missing a path
 
-            System.out.print("State: ");
+            System.out.print("\t Transition to State: ");
 
             switch(currentState){
                 case 0:
@@ -354,9 +354,9 @@ public class DFAClass {
 
         //Sees if we ended at the accept state.
         if(currentState == 5 || currentState == 6 || currentState == 7 || currentState == 8 || currentState == 9 || currentState == 15 || currentState == 16 || currentState == 17 || currentState == 18 || currentState == 19){
-            System.out.println("Reject");//Fixed
+            System.out.println("\nString Rejected\n");//Fixed
         }else{
-            System.out.println("Accept");//Fixed
+            System.out.println("\n String Accepted\n");//Fixed
         }
     }//End of main
 }
