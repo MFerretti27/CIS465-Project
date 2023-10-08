@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import static java.lang.Math.abs;
-/*
+import java.io.File;
+import java.io.FileNotFoundException;
+
+/***************************************
     Isaac Bouwkamp, Matthew Ferretti
-*/
+****************************************/
+
 public class DFAClass {
     private int numberOfStates = 40;
 
@@ -50,12 +54,32 @@ public class DFAClass {
         DFAClass Master = new DFAClass();//Just an object to use as a holding space for methods
 
         int validInput = 0;//This is a flag for the valid string length
+        String inputString = "";
 
         String word = "";
         while(validInput == 0) {
-            System.out.println("\nPlease enter a valid string: ");
+            System.out.println("\nPlease enter file name: ");
             Scanner scan = new Scanner(System.in);
-            String inputString = scan.nextLine();//Waiting for a valid input.
+            String fileName = scan.nextLine();//Waiting for a valid input.
+            scan.close();
+        
+
+            // File path is passed as parameter
+            File inputFile = new File("./" + fileName);
+            try {
+                Scanner reader = new Scanner(inputFile);
+
+                while (reader.hasNextLine()) {
+                    inputString = reader.nextLine();
+                    System.out.println("\nString in file: " + inputString);
+                }
+                reader.close();
+            }
+            catch (FileNotFoundException e) {
+                System.out.println("scanner error");
+                e.printStackTrace();
+            }
+
             word = inputString;
 
             if (inputString.length() % 3 == 0) {
@@ -63,8 +87,10 @@ public class DFAClass {
             } else {
                 System.out.println("Not a valid string...");
             }
-            scan.close();
+    
         }//End of checking for a valid sting length.
+
+
 
         //top down from 0 to 4 for the states.
         int[][] dataChart = new int[Master.getNumberOfStates()][Master.getNumberOfStates()];//all possible words and where they connect to. 5 states with 5 possible connections
@@ -261,7 +287,7 @@ public class DFAClass {
             listOfLetters.add(currentLetter);
         }
 
-        System.out.println("\n" + listOfLetters + "\n");//Test
+        System.out.println("\nList of Letters:" + listOfLetters + "\n");//Test
 
         int currentState = 1;//This is the state that we are at.
 
@@ -356,7 +382,7 @@ public class DFAClass {
         if(currentState == 5 || currentState == 6 || currentState == 7 || currentState == 8 || currentState == 9 || currentState == 15 || currentState == 16 || currentState == 17 || currentState == 18 || currentState == 19){
             System.out.println("\nString Rejected\n");//Fixed
         }else{
-            System.out.println("\n String Accepted\n");//Fixed
+            System.out.println("\nString Accepted\n");//Fixed
         }
     }//End of main
 }
