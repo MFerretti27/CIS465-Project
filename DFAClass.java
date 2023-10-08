@@ -96,7 +96,7 @@ public class DFAClass {
         dataChart[3][0] = -1; //A4 to A1
         dataChart[4][1] = 119; //A5 to A2
         dataChart[4][5] = 101; //A5 to A6
-        dataChart[4][10] = 1; //A5 to B1
+        dataChart[4][10] = 105; //A5 to B1
         dataChart[4][0] = -1; //A5 to A1
         dataChart[5][6] = 119; //A6 to A7
         dataChart[5][15] = 105; //A6 to B6
@@ -266,7 +266,7 @@ public class DFAClass {
         int currentState = 1;//This is the state that we are at.
 
         //Reads in the logic to follow the paths around the dataChart.
-        System.out.print("State: A1");
+        System.out.println("Start State: A1");
 
         for(int i = 0; i < listOfLetters.size(); i++){
             currentState = Master.readNextState(dataChart, currentState, listOfLetters.get(i).toString());//Error -101010 is this state is missing a path
@@ -353,11 +353,10 @@ public class DFAClass {
         }
 
         //Sees if we ended at the accept state.
-        //C1-5 and D1-5
-        if(currentState == 20 || currentState == 21 || currentState == 22 || currentState == 23 || currentState == 24 || currentState == 30 || currentState == 31 || currentState == 32 || currentState == 33 || currentState == 34){
-            System.out.println("Accept");
+        if(currentState == 5 || currentState == 6 || currentState == 7 || currentState == 8 || currentState == 9 || currentState == 15 || currentState == 16 || currentState == 17 || currentState == 18 || currentState == 19){
+            System.out.println("Reject");//Fixed
         }else{
-            System.out.println("Reject");
+            System.out.println("Accept");//Fixed
         }
     }//End of main
 }
